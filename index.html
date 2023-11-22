@@ -54,20 +54,28 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      Notiflix.Notify.init({
+        position: 'center-top'
+        
+        
+      });
       var editId = "";
 
       loadTable();
 
       $("#btnSave").click(function () {
+        if (editId !== "") {
+          Notiflix.Notify.warning('please Click Update');
+        return;
+      }
         let inputName = $('#txtTest').val();
             if (inputName === null || inputName === undefined || inputName === '' || !inputName.trim()) {
                 Notiflix.Notify.warning('please enter name');
                 return;
             }
 
-            confirmMsg("Are you sure want to Save?").then((result) => {
-          console.log(result);
-          if (!result) return;
+            
+          
           var test = $("#txtTest").val();
 
         // var lst = [];
@@ -93,8 +101,8 @@
         // sessionStorage.setItem("Test", test);
 
         loadTable();
-          successMsg("Saving Successful.");
-        });
+        Notiflix.Notify.success('Saving Successful');
+        
         
       });
 
