@@ -12,9 +12,11 @@
         integrity="sha256-quZ4+TPWUyQzuPnahKf6d8Xal6tZcYZTzSt4wFVEFn8=" crossorigin="anonymous" />
     <link rel="stylesheet" href="save.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/ladda-themeless.min.css">
+    <link rel="stylesheet" href="plugins/datepicker/datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
         integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 </head>
 
@@ -70,6 +72,12 @@
                                         <input type="password" id="password" class="form-control form-control-lg" />
                                         <label class="form-label" for="password">Password</label>
                                     </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="txtDate" class="form-control form-control-lg" />
+                                        <label class="form-label" for="txtDate">DOB</label>
+                                    </div>
+
 
                                     <div>
                                         <div class="icheck-primary icheck-inline">
@@ -138,8 +146,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/notiflix@3.2.6/dist/notiflix-aio-3.2.6.min.js"
         integrity="sha256-pXMqYvjzxYjuQ3+Iz0Zpw3Tk3BAoet8dOsODol/iqTI=" crossorigin="anonymous"></script>
+    <script src="plugins/datepicker/datepicker.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script>
+
         Notiflix.Notify.init({
             position: 'center-top'
 
@@ -157,6 +169,7 @@
             let inputName = $('#txtTest').val();
             let inputEmail = $('#txtEmail').val();
             let inputPassword = $('#password').val();
+            let date = $('#txtDate').val();
             let gender = $("input[name='gender']:checked").val();
             let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             let subject = Array.from(checkboxes).map(checkbox => checkbox.value);
@@ -175,8 +188,9 @@
                 var test = $("#txtTest").val();
                 var email = $("#txtEmail").val();
                 var password = $("#password").val();
-                var genders = $('#male').prop('checked', false);
-                var subjects =Array.from(checkboxes).map(checkbox => checkbox.value);
+                var dob = $("#txtDate").val();
+                var genders = gender;
+                var subjects = subject
 
 
 
@@ -192,11 +206,12 @@
                     Name: test,
                     Email: email,
                     password: password,
-                    genders: gender,
-                    subjects : subject,
+                    Dbo: dob,
+                    genders: genders,
+                    subjects: subjects,
 
 
-                    
+
                 };
 
                 lst.push(testObj);
@@ -212,7 +227,16 @@
                 // sessionStorage.setItem("Test", test);
 
 
-                Notiflix.Notify.success('Saving Successful');
+                Toastify({
+                    text: "Save Successful !!",
+                    className: "success",
+                    gravity: "top",
+                    position: "center",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)"
+                    }
+                }).showToast();
+
             }
 
 
@@ -239,6 +263,13 @@
         function setLocal(lst) {
             localStorage.setItem("Tbl_Test", JSON.stringify(lst));
         }
+
+        $('[data-toggle="datepicker"]').datepicker();
+
+        $('#txtDate').datepicker({
+            autoHide: true,
+            format: 'dd-mm-yyyy'
+        });
 
     </script>
 </body>
