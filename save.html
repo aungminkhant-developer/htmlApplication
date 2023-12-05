@@ -39,10 +39,7 @@
 
 
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
             </div>
         </div>
     </nav>
@@ -59,56 +56,59 @@
                                 <form>
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="txtTest" class="form-control form-control-lg" />
-                                        <label class="form-label" for="txtTest">Name</label>
+                                        <input type="text" id="txtTitle" class="form-control form-control-lg" />
+                                        <label class="form-label" for="txtTitle">Title</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="txtEmail" class="form-control form-control-lg" />
-                                        <label class="form-label" for="txtEmail">Email</label>
+                                        <input type="text" id="txtAuthor" class="form-control form-control-lg" />
+                                        <label class="form-label" for="txtAuthor">Author</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="password" class="form-control form-control-lg" />
-                                        <label class="form-label" for="password">Password</label>
+                                        <input type="text" id="txtContent" class="form-control form-control-lg" />
+                                        <label class="form-label" for="txtContent">Content</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="text" id="txtDate" class="form-control form-control-lg" />
-                                        <label class="form-label" for="txtDate">DOB</label>
+                                        <label class="form-label" for="txtDate">Release Date</label>
                                     </div>
-
 
                                     <div>
-                                        <div class="icheck-primary icheck-inline">
-                                            <input type="radio" id="male" name="gender" value="Male" />
-                                            <label for="male">Male</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="male" name="gender"
+                                                value="Male Writer">
+                                            <label class="form-check-label" for="male">Male Writer</label>
                                         </div>
-                                        <div class="icheck-primary icheck-inline">
-                                            <input type="radio" id="female" name="gender" value="Female" />
-                                            <label for="female">Female</label>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="female" name="gender"
+                                                value="Female Writer">
+                                            <label class="form-check-label" for="female">Female Writer</label>
                                         </div>
-                                        <div class="icheck-primary icheck-inline">
-                                            <input type="radio" id="other" name="gender" value="Other" />
-                                            <label for="other">Other</label>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="other" name="gender"
+                                                value="Other">
+                                            <label class="form-check-label" for="other">Other</label>
                                         </div>
+
                                     </div>
 
-
-
                                     <div style="margin-bottom: 10px;">
-                                        <label><b>Subject You Like </b></label>
+                                        <label><b>Book Type </b></label>
                                         <div class="icheck-primary icheck-inline">
-                                            <input type="checkbox" id="chb1" value="Html" />
-                                            <label for="chb1">Html</label>
+                                            <input type="checkbox" id="chb1" value="Poetry" name="txtGenre" />
+                                            <label for="chb1">Poetry</label>
                                         </div>
                                         <div class="icheck-primary icheck-inline">
-                                            <input type="checkbox" id="chb2" value="CSS" />
-                                            <label for="chb2">CSS</label>
+                                            <input type="checkbox" id="chb2" value="Fiction" name="txtGenre" />
+                                            <label for="chb2">Fiction</label>
                                         </div>
                                         <div class="icheck-primary icheck-inline">
-                                            <input type="checkbox" id="chb3" value="JavaScript" />
-                                            <label for="chb3">JavaScript</label>
+                                            <input type="checkbox" id="chb3" value="Comic" name="txtGenre" />
+                                            <label for="chb3">Comic</label>
                                         </div>
                                     </div>
 
@@ -166,31 +166,39 @@
                 l.stop();
             }, 1000);
 
-            let inputName = $('#txtTest').val();
-            let inputEmail = $('#txtEmail').val();
-            let inputPassword = $('#password').val();
-            let date = $('#txtDate').val();
-            let gender = $("input[name='gender']:checked").val();
-            let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            let subject = Array.from(checkboxes).map(checkbox => checkbox.value);
-            if (inputName === null || inputEmail === null || inputPassword === null) {
+            var inputTitle = $('#txtTitle').val();
+            var inputAuthor = $('#txtAuthor').val();
+            var inputContent = $('#txtContent').val();
+            var date = $('#txtDate').val();
+            var genre = [];
+            $("input[name='txtGenre']:checked").each(function () {
+                genre.push($(this).val());
+            });
+            genre = genre.join(",");
+            var gender = $("input[name='gender']:checked").val();
+
+
+            if (inputTitle === null || inputAuthor === null || inputContent === null) {
                 Notiflix.Notify.warning('Data Cannot Be Blank!!!!');
                 return;
             }
             else {
-                if (inputName === null || inputName === undefined || inputName === '' || !inputName.trim()) {
-                    Notiflix.Notify.warning('please enter name');
+                if (inputTitle === null || inputAuthor === undefined || inputContent === '' || !inputTitle.trim()) {
+                    Notiflix.Notify.warning('please enter Data');
                     return;
                 }
 
 
 
-                var test = $("#txtTest").val();
-                var email = $("#txtEmail").val();
-                var password = $("#password").val();
-                var dob = $("#txtDate").val();
-                var genders = gender;
-                var subjects = subject
+                // var title = $("#txtTitle").val();
+                // var author = $("#txtAuthor").val();
+                // var content = $("#txtContent").val();
+                // var releaseDate = $("#txtDate").val();
+                // var genders = getSelectedRadioValue('gender');
+                // var types = genre;
+
+
+
 
 
 
@@ -203,12 +211,13 @@
 
                 const testObj = {
                     Id: uuidv4(),
-                    Name: test,
-                    Email: email,
-                    password: password,
-                    Dbo: dob,
-                    genders: genders,
-                    subjects: subjects,
+                    Title: inputTitle,
+                    Author: inputAuthor,
+                    Content: inputContent,
+                    ReleaseDate: date,
+                    types: genre,
+                    genders: gender,
+                    
 
 
 
@@ -218,10 +227,14 @@
 
                 localStorage.setItem("Tbl_Test", JSON.stringify(lst));
 
-                $("#txtTest").val("");
-                $("#txtEmail").val("");
-                $("#password").val("");
-                $("#txtTest").focus();
+                $("#txtTitle").val("");
+                $("#txtAuthor").val("");
+                $("#txtContent").val("");
+                $("#txtDate").val("");
+                $("input[name='txtGenre']").prop('checked', false);
+                $("input[name='gender']").prop('checked', false);
+                
+                $("#txtTitle").focus();
 
                 // localStorage.setItem("Test", test);
                 // sessionStorage.setItem("Test", test);
@@ -271,6 +284,7 @@
             format: 'dd-mm-yyyy'
         });
 
+        
     </script>
 </body>
 
